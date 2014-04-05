@@ -1,0 +1,18 @@
+body {
+	margin: 0;
+	paddin: 0;
+}
+
+.story {
+	padding:20% 0;
+	width:100%;
+	margin: 0;
+}
+
+.story1 {
+	background:#666;
+}
+
+.story2 {
+	background:#888;
+}
