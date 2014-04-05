@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<head>
+<title>Falling</title>
+
+	<script type='text/javascript' src='http://cdnjs.cloudflare.com/ajax/libs/paper.js/0.22/paper.js'></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	
+</head>
+<body>
+    <script type="text/paperscript" canvas="canvas1">
+
+	        var path = new Path();
+	        path.strokeColor = 'pink';
+	        path.strokeWidth = 7;
+	        path.strokeCap = 'round';
+			path.opacity=.7;
+	        var start = new Point(50, 50);
+	        path.moveTo(start);
+	        path.lineTo(start + [50, -50]);
+			
+			var rectangle = new Rectangle();
+			var symbols = [];
+			var placedSyms = [];
+			var numShapes = 100;
+			var w = window.innerWidth;
+			var h = window.innerHeight;
+			i = 0;
+			while (i < numShapes) {
+		        symbols[i] = new Symbol(path);
+				placedSyms[i] = symbols[i].place(new Point(Math.floor(Math.random()*w*1.5), Math.floor(Math.random()*h/5) + 150));
+				placedSyms[i].rotateX = Math.floor(Math.random()*w/2)+w/4;
+				placedSyms[i].rotateY = -Math.floor(Math.random()*h/2)-h/4;
+				placedSyms[i].scale(Math.random());
+				placedSyms[i].rotate(Math.random()*360);
+				i++;
+			}
+	        window.onscroll = scroll;
+	        var scrollY = 0;
+	        var posY = 0;
+	        var dy = 0;
+	        lastYOffset = 0;
+
+	        function scroll() {
+				var musicEndLocation = $( '#story13' ).offset().top;
+	            var scrollTop = $(window).scrollTop();
+				
+	            if (scrollTop <= musicEndLocation) {
+	            document.getElementById("backgrounddiv").style.top = window.pageYOffset + "px";
+				}
+	            scrollY = window.pageYOffset;
+	        }
+
+	        function onFrame(event) {
+				//dy = change since last scroll
+	            dy = (window.pageYOffset - lastYOffset) / 5;
+				i = 0;
+				while (i < numShapes) {
+					//rotating on individual line's pivot point according to scroll location
+					placedSyms[i].rotate(dy/i, placedSyms[i].rotateX, placedSyms[i].rotateY);
+					// constant spinning
+					placedSyms[i].rotate(.1);
+					i++;
+				}
+	            lastYOffset = window.pageYOffset;
+	        }
+    </script>
+
+<div id="backgrounddiv" style="position:absolute; top:0; left:0;">
+	<canvas id="canvas1" resize></canvas>
+</div>
+
+
+
+</body>
