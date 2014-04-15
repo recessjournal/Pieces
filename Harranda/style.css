@@ -1,9 +1,37 @@
 body {
 	margin: 0;
-	paddin: 0;
-	font-family:helvetica, sans-serif;
+	padding: 0;
+	font-family: 'Karla', sans-serif;
+	font-style:italic;
 	background:#fff url('turkey-armenia-border.jpg') fixed;
 	background-position:center top;
+}
+
+#header {
+	width:100%;
+	position:fixed;
+	height:40px;
+	margin-bottom:25px;
+	background:black;
+}
+
+#title {
+	width:100%;
+	margin-top:10px;
+	margin-left:12px;
+	text-align:left;
+	color:#fff;
+}
+.byline {
+	color:#fba;
+	margin-left:20px;
+	font-size:12px;
+}
+
+#recesslogo {
+	position:fixed;
+	top:8px;
+	right:10px;
 }
 
 .emaside {
@@ -25,67 +53,11 @@ body {
 	margin: 0;
 	display:inline-block;
 }
-
-.story1 {
-}
-
-.story2 {
-	left:1200px;
-}
-
-.story3 {
-	left:1800px;
-}
-
-.story4 {
-	left:2400px;
-	
-}
-
-.story5 {
-	left:3400px;
-}
-
-
-.story6 {
-	left:4000px;
-}
-
-.story7 {
-	left:4600px;
-	padding-right:20%;
-}
-
-.story p {
-	line-height:1.5;
-	display:inline-block;
-}
-
-.illus {
-	position:absolute;
-	height:400px;
-	width:400px;
-	bottom:0;
-	z-index:-5;
-	padding:0 0px;
-	opacity:.5;
-}
-.illus1 {
-	/*background:#fff url('turkey-armenia-border-3.jpg');*/
-	left:600px;
-	height:100%;
-	width:600px;
-	
-}
-
-.illus2 {
-	left:3000px;
-	/*background:#fff url('turkey-harran-1.jpg');*/
-	height:100%;
-	
-}
-
-.illus3 {
-	background:#aa3;
-	display:none;
-}
+.story1 {}
+.story2 { left:800px;}
+.story3 { left:1400px;}
+.story4 { left:2000px;}
+.story5 { left:3000px;}
+.story6 { left:3600px;}
+.story7 { left:4200px; padding-right:20%;}
+.story p { line-height:1.5; display:inline-block;}
