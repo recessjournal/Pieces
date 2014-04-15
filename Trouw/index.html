@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<head>
+<title>Trouw</title>
+
+	<script type='text/javascript' src='http://cdnjs.cloudflare.com/ajax/libs/paper.js/0.22/paper.js'></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js"></script>
+	<link href='http://fonts.googleapis.com/css?family=Source+Code+Pro:300' rel='stylesheet' type='text/css'>
+
+<style type='text/css'>
+    * {
+    margin: 0;
+    padding: 0;
+}
+body {
+    background:#000;
+    color:pink;
+	font-family: 'Source Code Pro', courier;
+	line-height:1.3em;
+    height:1000px;
+}
+#scrolloffset {
+    display:none;
+    position:fixed;
+    z-index:100;
+    top:30px;
+    right:10px;
+}
+#backgrounddiv {
+    z-index:-5;
+}
+#title {
+    text-align:center;
+	font-size:20px;
+}
+#byline {
+	text-align:center;
+	line-height:1.5em;
+	margin-top:20px;
+	padding:5px 3px;
+}
+.story {
+	padding:10px;
+    margin:2em auto;
+    width:300px;
+}
+p {
+	padding:15px 25px;
+	background:yellow;
+	color:black;
+}
+.story-break {
+	padding-top:7em;
+}
+.story-left {
+	padding-right:310px;
+}
+.story-right {
+	padding-left:310px;
+}
+.story-full {
+	width:600px;
+}
+#trouw-content {
+	margin:50px 0;
+}
+
+#player {
+	position:absolute;
+	margin-left:-9999px;
+}
+#soundOnOff{
+	position:fixed;
+	top:10px;
+	left:10px;
+	z-index:500;
+}
+#soundOnOff:hover {
+	background:pink;
+	color:black;
+}
+#end {
+	width:50%;
+	margin-top:2em;
+	background:url(blueflash.gif) repeat-x;
+	height:10px;
+	position:absolute;
+}
+#credits {
+	width:600px;
+	margin:100px auto;
+	padding:50px 0 0 0;
+	font-size:12px;
+}
+#recesslogo {
+	position:fixed;
+	top:15px;
+	right:15px;
+}
+a, a:link, a:hover, a:active, a:visited {
+	color:pink;
+	text-decoration:none;
+}
+a:hover {
+	color:black;
+	background:pink;
+}
+#story15 {
+	margin-bottom:150px;
+}
+  </style>
+
+</head>
+<body>
+
+<script type='text/javascript'>
+    //Load player api asynchronously.
+    var tag = document.createElement('script');
+    tag.src = "https://www.youtube.com/iframe_api";
+    var firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+    var done = false;
+    var player;
+    function onYouTubeIframeAPIReady() {
+        player = new YT.Player('player', {
+          height: '390',
+          width: '640',
+          videoId: 'ELvyAK_-0O4',
+		  startSeconds: '950',
+          events: {
+            'onReady': onPlayerReady,
+           // 'onStateChange': onPlayerStateChange
+          }
+        });
+    }
+    function onPlayerReady(evt) {
+	player.setVolume(0);
+	var duration = player.getDuration();
+	console.log(duration);
+	player.seekTo(950, true);
+	player.playVideo();
+	player.seekTo(950, true);	
+    }
+    /*function onPlayerStateChange(evt) {
+        if (evt.data == YT.PlayerState.PLAYING && !done) {
+            setTimeout(stopVideo, 6000);
+            done = true;
+        }
+    }*/
+	$(function() {
+		var soundSwitch = false;
+		var ytplayer = 0;
+		$("#soundOnOff").click(function() {
+			player.seekTo(950);	
+			
+		if (soundSwitch == true) {
+			soundSwitch = false;
+			$(this).html("Sound Off");
+			stopVideo();
+		} else {
+			soundSwitch = true;
+			$(this).html("Sound On");
+			player.playVideo();
+		}
+	});
+	});
+    function stopVideo() {
+        player.stopVideo();
+    }
+	</script>
+    <script type="text/paperscript" canvas="canvas1">
+
+	        var path = new Path();
+	        path.strokeColor = 'pink';
+	        path.strokeWidth = 7;
+	        path.strokeCap = 'round';
+			path.opacity=.7;
+	        var start = new Point(50, 50);
+	        path.moveTo(start);
+	        path.lineTo(start + [50, -50]);
+			
+			var rectangle = new Rectangle();
+			var symbols = [];
+			var placedSyms = [];
+			var numShapes = 100;
+			var w = window.innerWidth;
+			var h = window.innerHeight;
+			i = 0;
+			while (i < numShapes) {
+		        symbols[i] = new Symbol(path);
+				placedSyms[i] = symbols[i].place(new Point(Math.floor(Math.random()*w*1.5), Math.floor(Math.random()*h/5) + 150));
+				placedSyms[i].rotateX = Math.floor(Math.random()*w/2)+w/4;
+				placedSyms[i].rotateY = -Math.floor(Math.random()*h/2)-h/4;
+				placedSyms[i].scale(Math.random());
+				placedSyms[i].rotate(Math.random()*360);
+				i++;
+			}
+	        window.onscroll = scroll;
+	        var scrollY = 0;
+	        var posY = 0;
+	        var dy = 0;
+	        lastYOffset = 0;
+
+	        function scroll() {
+				var musicEndLocation = $( '#story13' ).offset().top;
+	            var scrollTop = $(window).scrollTop();
+				
+	            if (scrollTop <= musicEndLocation) {
+	            document.getElementById("backgrounddiv").style.top = window.pageYOffset + "px";
+				}
+	            scrollY = window.pageYOffset;
+	            //setTimeout("smoothMove()", 5);
+
+				
+				if (scrollY < 500) {
+					if (player) {
+						player.setVolume(Math.floor(scrollY/5));
+					}
+				}
+	            if (scrollTop >= musicEndLocation) {
+					if ((scrollTop - musicEndLocation) < 400) {
+						player.setVolume(Math.floor((500-(scrollTop - musicEndLocation))/5));
+					}
+				}
+	        }
+
+	        function onFrame(event) {
+	            dy = (window.pageYOffset - lastYOffset) / 5;
+				i = 0;
+				while (i < numShapes) {
+					placedSyms[i].rotate(dy/i, placedSyms[i].rotateX, placedSyms[i].rotateY);
+					placedSyms[i].rotate(.1);
+					i++;
+				}
+	            lastYOffset = window.pageYOffset;
+	        }
+    </script>
+
+
+<div id="soundOnOff">Sound Off</div>
+<div id="recesslogo">
+	<a href="http://recessjournal.com/"><img src="recess-black100x25.png" width="100" height="25" alt="Recess Black150x37"></a>
+</div>
+
+<div id="backgrounddiv" style="position:absolute; top:0; left:0;">
+	<canvas id="canvas1" resize></canvas>
+</div>
+
+<div id="trouw-content">
+
+	<div id="title"><span style="background:yellow;padding:5px;color:black;">Trouw</span></div>
+	<div id="byline"><span style="background:yellow;padding:5px;color:black;">by Sophia Seawell<br />Brown '14</span></div>
+	<div id="player"></div>
+
+	<div id="story0" class="story story-full story-break"><p>It&rsquo;s August in Germany, and in our kitchen, kept cool by tiles and shadows, my mother and I are making dinner. I keep my laptop on the island to reference the recipe we are preparing,’ and open Barnt&rsquo;s Boiler Room set in another tab. As I chop mushrooms, my right foot tapping the tiles, I notice my mother eyeing the screen. &ldquo;Your music taste has changed,&rdquo; she says. Her voice lifts slightly at the end, a statement and a question.</p></div>
+	<div id="story1" class="story story-full"><p>Later on the couch, I am listening to a live stream of Xosar at Dekmantel festival (I left Amsterdam a few days ago, and I&rsquo;m having withdrawals). &ldquo;Doesn&rsquo;t this music make you nervous?&rdquo; my mother calls from the kitchen. &ldquo;It makes me zenuwachtig.&rdquo; My father comes to sit next to me; he wants to bond. &ldquo;How do you dance to this kind of music?&rdquo; he asks. My parents and brother conspire, moving robotically across the living room, laughing at one another.</p></div>
+	<div id="story2" class="story story-full"><p>I know this question, having asked it myself not long ago, having felt the same distance from this thing referred to, vaguely, as &ldquo;dance music.&rdquo; During my few months in Amsterdam, my curiosity and excitement as I biked past posters for music festivals waned as I came to learn they were almost always electronic music festivals. Electronic: mechanical, rhythmless, flat, cold. One such festival was called  &lsquo;Welcome to the Future&rsquo; and already, at 20, I felt like a part of the past, apart from my generation and the music by which it is coming to be defined.</p></div>
+	<div id="end" style="width:50%;left:50%;"></div>
+	<div id="story3" class="story story-left story-break"><p>My first time at Trouw was for a party hosted by the International Student Network at the end of our orientation week. My group sat in the restaurant section&#150;once upstairs, you can go left into the smoke room or the dance floor, parallel to one another and separated by a windowed wall, or right to the restaurant&#150;and talked. Though it&rsquo;s possible that we did, I don&rsquo;t remember dancing. I do remember the following remarks, repeated: &ldquo;It&rsquo;s so nice to be able to talk in a club!&rdquo;</p></div>
+	<div id="story4" class="story story-right"><p>That was fall. In spring, I started going with Sheila to her friend&rsquo;s gigs; he was part of a DJ collective. The first time, we had just arrived back from Prague&#150;I was tired and had envisioned nothing more than meeting for a drink. &ldquo;They&rsquo;re DJing in OT301,&rdquo; she told me over the phone. &ldquo;Please, please, please.&rdquo; It was far by my standards, and I was tired, but I agreed. Still hungover from our last night in the Czech Republic, I didn&rsquo;t feel like drinking, and in the end there was no need to.</p></div>
+	<div id="story5" class="story story-left"><p>They played disco and music from Iran and Mali&#150;nothing I would describe as mechanical, certainly not as cold. It was warm and friendly, inviting me to play. When I heard the rhythmical breathing of a song I later learned was Venganza Y Seducción feat. Daniel Maloso by Rebolledo I started to understand; when they played Justin Timberlake, they had me. If this was the dance music of my generation, I welcomed the future.</p></div>
+	<div id="end" style="width:50%;left:25%;"></div>
+	<div id="story6" class="story story-full story-break"><p>Summertime. We descend the cement steps, from one kind of darkness into another, into Trouw. Once downstairs, we pay to take off our clothes and in turn receive ticket stubs and a certain freedom of movement, a certain lightness of being. We walk into the upstairs hall, where two girls are dancing on the speakers of the DJ booth. It&rsquo;s Maria and Fenna. I can tell them apart in the dimness by their hair, and the way the each of them move&#150;Maria with her arms, Fenna from the hips. Neither of them lift their feet. Their bodies become extensions of the speakers: living, breathing manifestations of music.</p></div>
+	<div id="story7" class="story story-left"><p>I&rsquo;m in the verdieping, the basement. To my right there&rsquo;s a boy with tousled blond hair and shy eyes behind glasses. We make eye contact, smile, look away, repeat. There are people who verbalize themselves on the dancefloor, speaking through cupped hands into each other&rsquo;s ears, but he and I either have nothing to say or are already saying it. He offers me a cigarette, and I am elated that he knew I wanted one; it never occurs to me that it was a routine gesture. No, he knew. How do I express my gratitude? I make eye contact and we smile. We continue to dance, facing the DJ booth, side by side until one moment I look to my right and see he isn&rsquo;t there. The next morning I have a feeling that we may have, in fact, spoken. He may have even told me his name.</p></div>
+	<div id="story8" class="story story-full"><p>I&rsquo;m sitting on Gorka&rsquo;s lap in the smoking room, with Tallulah on our left, on the one long red booth-like seat that lines the wall. Across from us is a window. Usually from here I can see the lights flicker across the crowd, hands sporadically raised, bodies moving in and out of sync. Tonight I can hear the music, feel faint vibrations, but my view is blocked by a particularly tall man who is staring at me. I ask if I&rsquo;ve stolen his seat. &ldquo;I&rsquo;m fascinated by you,&rdquo; he tells me, eyes wide. He crouches next to me; he is coming up. He is also half-American, and has just cut his hair, and has a last name that apparently I should recognize. He doesn&rsquo;t like dance music&#150;a characteristic I find endearing, I was you once&#150;and wants to kiss. But there are melodies beckoning me, reminding my body it has better things to do than disappear into corners. That&rsquo;s not what I came here for. &ldquo;It was nice to meet you,&rdquo; I tell him, but it&rsquo;s time to get up.</div>
+	<div id="end"></div>
+	<div id="story9" class="story story-right story-break"><p>I am washing my hands. It may be a strange thing to say but I love Trouw&rsquo;s bathroom: the sweets offered to us in a little dish at the entrance, the soul and hip-hop emanating from the speakers brought along by the staff, the dance floors created by those in the queue. I am wearing a black dress with a low back and long sleeves. To my left I see a girl washing her hands wearing a black dress with a low back and long sleeves. She sees me seeing her and our reflections smile at each other. On another night, I am told by a girl perched on the sink that my nose ring really suits me. For whatever reason, we&rsquo;re all feeling a bit friendlier than we would outside, but to explain away these interactions with assumptions about substances and states of mind is to dismiss the ideal from which Trouw derives its name: the verb &lsquo;Vertrouwen&rsquo; means &lsquo;to trust.&rsquo;</p></div>
+	<div id="story10" class="story story-full"><p>The night starts tentatively; I am with several French girls, only one of whom I know well, and they don&rsquo;t appear to be enjoying themselves. I go sit with Marine on the stairs at the back of the upstairs hall, stairs that lead to nowhere. &ldquo;Are you okay?&rdquo; I ask. &ldquo;Yes, I&rsquo;m fine,&rdquo; she says, smiling at me pleasantly, and I believe her. &ldquo;I just like to sit here and watch.&rdquo; We sit and watch. It&rsquo;s early and the music is lighter and slower than it will be later. Some are already enthusiastically dancing in front of the DJ booth, others mill about, beers in hand. Later, I will be sitting here with a friend who can no longer dance, and Max will sit on her right, and we will comfort her with encouraging words and kisses on the cheek, our arms around her shoulders. But I don&rsquo;t know this yet, and with Marine, it feels calm. Here, we can talk. </p></div>
+	<div id="story11" class="story story-left"><p>Two friends arrive who I hadn&rsquo;t expected to see, and what could be happier? We go downstairs, where the ceiling is lower and the beat slower and use the ample space on the far end of the room to dance freely, without bumping into beers or elbows. This basement is our playground. But as I feel the set winding down I know that I want to be between the bodies; I share this with Maria, who without hesitation pulls me to the front. A man hoists me onto his shoulders just as the music ends and when they refuse to play another song&#150;they take six o&rsquo;clock too seriously&#150; I climb down, ungracefully, dejected.</p></div>
+	<div id="story12" class="story story-right"><p>The security staff usher us out of the verdieping. They don&rsquo;t let us linger by coat check, urging us up the stairs, outside. When we stay too long between the benches and bike racks they follow us and shoo us away like we are vultures crowding the body of a night that has passed. &ldquo;Go home!&rdquo; they say, half-irritated and half-amused. &ldquo;Go home.&rdquo;</p></div>
+	<div id="end" style="width:50%;left:25%;"></div>
+	<div id="story13" class="story story-full story-break"><p>The next night, the two of us return to Trouw&#150;his best friend is DJing tonight. I&rsquo;ve never been here on a Sunday, and my time in Amsterdam is petering out. I&rsquo;m exhausted from the last two nights and I have to work in the morning, but the music is warm and lovely and my body responds with an energy that I didn&rsquo;t know it had. &ldquo;What time is it?&rdquo; I ask during a break in the  smoke room, sitting across from the window, watching the shadows pulse. I expect to hear 1 or  2; &ldquo;it&rsquo;s 4:30,&rdquo; someone tells me. I laugh, lean back, and watch the shadows dance. It&rsquo;s too late to care now, and I&rsquo;m content here; I put my arm through his. Someone on my left has begun telling me everything they know about  U.S. geography (they know much more than I do). On my right, he laces his fingers through mine. Soon it&rsquo;s six&#150;his best friend comes to say hello, to ask us to stay, they&rsquo;re going to be playing another set, but instead we collect our clothes and walk back up the stairs, squinting as the faint daylight reaches our eyes. He gave me a ride here on his bike, so now we walk back together, passing Hartog&rsquo;s Volkoren Bakkerij where croissants are rising. At his door, I kiss him. I have to work in the morning, but the morning is already here.</p></div>
+	<div id="story14" class="story story-full"><p>It is fall again, but now there is an ocean between Amsterdam and me. I take a bus from Providence to New York to see my freshman year roommate, who became an art history major and transferred to NYU, but perhaps just as much to see his best friend DJ again&#150;he is playing on a rooftop somewhere in Brooklyn. He had told me before another girl from Amsterdam, studying at MIT, would be there, and that evening he points Rixt and I out to one another from behind the DJ booth. We dance, make small talk in Dutch. &ldquo;Do you miss Trouw?&rdquo; she asks.</p><p>Remembering this the next morning, I smile to myself and open my eyes, finding that the bus is making its way out of the city on Amsterdam Avenue. I am going back to Providence, for now.<p></div>
+	<div id="story15" class="story story-full"><p>I have kept my promises to those I left behind, and by New Year&rsquo;s Day I am in Amsterdam again. It&rsquo;s 9am, and the first day of the last year of Trouw. There are countless disco balls spinning above the DJ booth, and I know I should feel lucky to be here and to be hearing this set, and I do&#150;but we&rsquo;ve been doing this since 11pm and I&rsquo;m losing stamina. I turn to my left, to the one I am here with. &ldquo;I think I want to sit for a minute,&rdquo; I tell him. He takes my hand and we make our way through the long, narrow crowd to the stairs that lead to nowhere, where we kiss as the disco balls spin and the shadows dance.</p></div>
+	<div id="end" style="width:50%;left:25%;"></div>
+&nbsp;
+	<div id="credits" class="story-break"><p>
+		design/development: Koji Yamamoto Brown/RISD '15<br />
+		music:<a href="https://www.youtube.com/watch?v=ELvyAK_-0O4&noredirect=1#t=1031">Barnt Boiler Room Berlin DJ Set</a></p>
+	</div><!--#credits-->
+
+</div><!--trouw-content-->
+
+</body>
+</html>
