@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<!--
+make a very long container 
+make each letter in a separate div
+at first have them all stay on the screen as you scroll
+and then as it goes down, use scrolling stuff from saudade, SET POSITION AS YOU SCROLL have some of the the letters move, have them disappear one by one 
+LOOK AT TROUW FOR SCROLLING STUFF
+make style and script in the head 
+
+Make a greater container for Following
+Make that relative positioning
+Then set each letter (look up kerning.js) 
+
+--!>
+<head>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+	<style type = text/css>
+	body {
+	background:url("http://placekitten.com/200/300");
+	
+	}
+	#backgrounddiv {
+		background-color:#EEEEEE;
+		height:4000px;
+		width:500px;
+	}
+	
+	#falling {
+		position:absolute;
+		background:#f00;
+		height:100px;
+		top:300px;
+	}
+	
+	div.letter {
+		position: absolute;
+		}
+
+	#F{
+		left: 50px;
+		top: 0px;
+		}
+	#A{
+		left: 100px;
+		//top: 0px;
+		}
+	#L{
+		left: 150px;
+		//top: 0px;
+		}
+	#L1{
+		left: 200px;
+		//top: 0px;
+		}
+	#I{
+		left: 250px;
+		//top: 0px;
+		}
+	#N{
+		left: 300px;
+		//top: 0px;
+		}
+	#G{
+		left: 350px;
+		//top: 0px;
+		}
+		
+	</style>
+	
+	
+</head>
+<body>
+
+<script type = "text/javascript">
+	$(function() {
+	        ////var scrollY = 0;
+	        var posY = 0;
+	        var dy = 0;
+	        lastYOffset = 0;
+
+			window.onscroll = scroll;
+
+	        function scroll() {
+				var fadeF = $( '#end' ).offset().top;
+				var fadeA = $( '#end' ).offset().top;
+				var fadeL1 = $(  '#end' ).offset().top;
+				var fadeL2 = $(  '#end' ).offset().top;
+				var fadeI = $(  '#end' ).offset().top;
+				var fadeN = $(  '#end' ).offset().top;
+				var fadeG = $(  '#end' ).offset().top;
+				
+	            var scrollTop = $(window).scrollTop();
+				
+	           
+	            if (scrollTop < 1200) {
+	            		            document.getElementById("falling").style.top =300 + window.pageYOffset + "px";
+
+	            }
+	            if (scrollTop >= 1200) {
+	            		            document.getElementById("falling").style.top = 1500 + "px";
+
+	            }
+	            if (scrollTop > 200) {
+	            		            document.getElementById("F").style.top = 200-window.pageYOffset + "px";
+	            }
+	            if (scrollTop <= 200) {
+	            		            document.getElementById("F").style.top = 0 + "px";
+	            }
+	            if (scrollTop > 300) {
+	            		            document.getElementById("N").style.top = 300-window.pageYOffset + "px";
+	            }
+	             if (scrollTop <= 300) {
+	            		            document.getElementById("N").style.top = 0 + "px";
+	            }
+	            if (scrollTop > 400) {
+	            		            document.getElementById("L1").style.top = 400-window.pageYOffset + "px";
+
+	            }
+	            if (scrollTop <= 400) {
+	            		            document.getElementById("L1").style.top = 0 + "px";
+	            }
+	            if (scrollTop > 500) {
+	            		         document.getElementById("L").style.top = 450-window.pageYOffset + "px";
+
+	            }
+	           if (scrollTop <= 500) {
+	            		            document.getElementById("L").style.top = 0 + "px";
+	            }
+	            if (scrollTop > 600) {
+	            		            document.getElementById("A").style.top = 600-window.pageYOffset + "px";
+
+	            }
+	            if (scrollTop <= 600) {
+	            		            document.getElementById("A").style.top = 0 + "px";
+	            }
+	             if (scrollTop > 700) {
+	            		         document.getElementById("N").style.top = 700-window.pageYOffset + "px";
+
+	            }
+	            if (scrollTop <= 700) {
+	            		            document.getElementById("N").style.top = 0 + "px";
+	            }
+	             if (scrollTop > 800) {
+	            		         document.getElementById("I").style.top = 750-window.pageYOffset + "px";
+
+	            }
+	             if (scrollTop <= 800) {
+	            		            document.getElementById("I").style.top = 0 + "px";
+	            }
+	              if (scrollTop > 900) {
+	            		         document.getElementById("I").style.top = 900-window.pageYOffset + "px";
+
+	            }
+	             if (scrollTop <= 900) {
+	            		            document.getElementById("I").style.top = 0 + "px";
+	            }
+	           
+	            
+				console.log(window.pageYOffset);
+			}
+			
+
+	            //scrollY = window.pageYOffset;
+
+			/*	
+				if (scrollY < 500) {
+					if (player) {
+						player.setVolume(Math.floor(scrollY/5));
+					}
+				}
+	            if (scrollTop >= fadeF) {
+					if ((scrollTop - fadeF) < 400) {
+						player.setVolume(Math.floor((500-(scrollTop - fadeF))/5));
+					}
+				}
+	        */
+	});
+	        
+	</script>
+<div id="backgrounddiv">
+<div id = "falling">
+	<div id = "F" class = "letter">
+		<p>
+			F
+		</p>
+	</div>
+	<div id = "A" class = "letter">
+		<p>
+			A
+		</p>
+	</div>
+		<div id = "L1" class = "letter">
+		<p>
+			L
+		</p>
+	</div>
+	<div id = "L" class = "letter">
+		<p>
+			L
+		</p>
+	</div>
+	<div id = "I" class = "letter">
+		<p>
+			I
+		</p>
+	</div>
+	<div id = "N" class = "letter">
+		<p>
+			N
+		</p>
+	</div>
+	<div id = "G" class = "letter">
+		<p>
+			G
+		</p>
+	</div>
+	<div id = "end">
+	</div>
+</div>
+</div>
+</body>
