@@ -1,22 +1,69 @@
+
+
 .container {
 padding: 300px 200px;
 }
 
 .js-background-1 {
-    background: transparent url(bg1.png) center 0 no-repeat;
+    background: #A3DAE6 url(bg1.png) center 0 no-repeat;
 }
 
 .js-background-2 {
-    background: #55f url(bg1.png) center 0 no-repeat;
+    background: #A3DAE6 url(bg1.png) center 0 no-repeat;
 }
 
 .js-background-3 {
-    background: #f66 url(bunny.png) center 0 no-repeat;
+    background: #A3DAE6 url(bunny.png) center 0 no-repeat;
 }
 
 .js-background-4{
-	background: #f66 url(bg1.png) center 0 no-repeat;
-	}
+	background: #000;
+	color:#fff;
+}
+.js-background-5{
+	background: #000;
+	color:#fff;
+}
+
+.js-background-6{
+	background: #000;
+	color:#fff;
+}
+
+.js-background-7{
+	background: #000;
+	color:#fff;
+}
+	
+.js-background-8{
+	background: #000;
+	color:#fff;
+}
+.js-background-9{
+	background: #000;
+	color:#fff;
+}
+.js-background-10{
+	background: #FFF2D4;
+	color:#000;
+}
+
+.js-background-11{
+	background: #FFF2D4;
+	color:#000;
+}
+.js-background-12{
+	background: #FFF2D4;
+	color:#000;
+}
+.js-background-13{
+	background: #83B07D;
+	color:#000;
+}
+.js-background-14{
+	background: #83B07D;
+	color:#fff;
+}
 
 
 .container2 {
@@ -25,7 +72,7 @@ padding: 300px 200px;
 
 
 body {
-
+	font-family:'Karla', sans-serif;
 	line-height:3;
 }
 
